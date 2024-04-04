@@ -71,10 +71,16 @@ k.scene("main", async () => {
                         (map.pos.x + entity.x) * scaleFactor,
                         (map.pos.y + entity.y) * scaleFactor
                     );
+                    k.add(player);
+                    continue;
                 }
             }
         }
     }
+
+    k.onUpdate(() => {
+        k.camPos(player.pos.x, player.pos.y + 100);
+    });
 });
 
 k.go("main");
