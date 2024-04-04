@@ -96,8 +96,8 @@ k.scene("main", async () => {
 
         const mouseAngle = player.pos.angle(worldMousePos)
 
-        const lowerBound = 50
-        const upperBound = 125
+        const lowerBound = 50;
+        const upperBound = 125;
 
         if (
             mouseAngle > lowerBound &&
@@ -118,6 +118,33 @@ k.scene("main", async () => {
             player.direction = "down";
             return;
         }
+
+        if (Math.abs(mouseAngle) > upperBound) {
+            player.flipX = false;
+            if (player.curAnim() !== "walk-side") player.play("walkside");
+            player.direction = "right";
+            return;
+        }
+
+        if (Math.abs(mouseAngle) < lowerBound) {
+            player.flipX = true;
+            if (player.curAnim() !== "walk-side") player.play("walkside");
+            player.direction = "left";
+            return;
+        }
+    });
+
+    k.onMouseRelease(() => {
+        if (player.direction === "down") {
+            player.play("idle-down");
+            return;
+        }
+        if (player.direction === "up") {
+            player.play("idle-up");
+            return;
+        }
+
+        player.play("idle-side");
     });
 });
 
