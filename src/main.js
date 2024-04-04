@@ -7,11 +7,11 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
     sliceY: 31,
     anims: {
         "idle-down": 936,
-        "wlak-down": { from: 936, to: 939, loop: true, speed: 8 },
+        "walk-down": { from: 936, to: 939, loop: true, speed: 8 },
         "idle-side": 975,
-        "wlak-side": { from: 975, to: 978, loop: true, speed: 8 },
+        "walk-side": { from: 975, to: 978, loop: true, speed: 8 },
         "idle-up": 1014,
-        "wlak-up": { from: 1014, to: 1017, loop: true, speed: 8 },
+        "walk-up": { from: 1014, to: 1017, loop: true, speed: 8 },
     },
 });
 
@@ -106,6 +106,16 @@ k.scene("main", async () => {
         ) {
             player.play("walk-up");
             player.direction = "up";
+            return;
+        }
+
+        if (
+            mouseAngle < -lowerBound &&
+            mouseAngle > -upperBound &&
+            player.curAnim() !== "walk-down"
+        ) {
+            player.play("walk-down");
+            player.direction = "down";
             return;
         }
     });
