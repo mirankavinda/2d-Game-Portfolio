@@ -18,6 +18,7 @@ export function displayDialogue(text, onDisplayEnd) {
     }, 5);
 
     const closeBtn = document.getElementById("close");
+    
     function onCloseBtnClick() {
         onDisplayEnd();
         dialogueUI.style.display = "none";
